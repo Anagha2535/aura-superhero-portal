@@ -1,0 +1,467 @@
+:root {
+  --power-golden: #FFD76A;
+  --power-yellow: #FFD76A;
+  --power-pink: #FF69B4;
+  --power-purple: #9370DB;
+  --power-gold-light: #FFD76A;
+  --power-cyan: #63E6E2;
+  --powers-bg: #0A0A1A; /* deep midnight */
+}
+
+.powers-page {
+  height: 100vh;
+  background-color: var(--powers-bg);
+  position: relative;
+  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+  color: white;
+}
+
+.powers-intro {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.powers-title {
+  font-size: 3rem;
+  letter-spacing: 4px;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 1s ease, transform 1s ease;
+  color: white;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.powers-subtitle {
+  font-size: 1.2rem;
+  color: #a0a0b8;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+}
+
+.powers-title.visible, .powers-subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.powers-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Effects */
+.powers-bg-effects {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.aurora-borealis {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05) 0%, rgba(147, 112, 219, 0.03) 30%, transparent 70%);
+  animation: aurora-move 20s infinite alternate ease-in-out;
+}
+
+.stars-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 10% 20%, white 100%, transparent),
+    radial-gradient(1px 1px at 30% 50%, white 100%, transparent),
+    radial-gradient(1.5px 1.5px at 70% 80%, white 100%, transparent),
+    radial-gradient(2px 2px at 90% 10%, rgba(255, 255, 255, 0.8) 100%, transparent);
+  background-size: 200px 200px;
+  opacity: 0.3;
+  animation: star-twinkle 4s infinite alternate;
+}
+
+@keyframes aurora-move {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(5deg) scale(1.1); }
+}
+
+@keyframes star-twinkle {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.5; }
+}
+
+/* Connections Layer */
+.connections-layer {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.connection-line {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  opacity: 0.4;
+  filter: drop-shadow(0 0 3px currentColor);
+  transition: stroke-dashoffset 2s ease-in-out, opacity 0.3s;
+}
+
+.connection-line.visible {
+  stroke-dashoffset: 0;
+}
+
+.connection-line.active {
+  opacity: 0.9;
+  stroke-width: 4.5;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* Animated flowing energy particles */
+.energy-particle {
+  fill: none;
+  stroke-width: 4;
+  stroke-dasharray: 8 1000;
+  stroke-dashoffset: 1000;
+  opacity: 0;
+  filter: drop-shadow(0 0 10px currentColor);
+  transition: opacity 0.5s;
+}
+
+.energy-particle.visible {
+  opacity: 0.8;
+  animation: energy-flow 3s linear infinite;
+}
+
+.energy-particle.active {
+  stroke-width: 6;
+  opacity: 1;
+  filter: drop-shadow(0 0 15px currentColor);
+  animation: energy-flow 1.5s linear infinite;
+}
+
+@keyframes energy-flow {
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Aura Center */
+.aura-center-wrapper {
+  position: relative;
+  z-index: 5;
+  /* Aura should occupy approximately 25-30% of the viewport height on desktop */
+  width: 28vh;
+  height: 28vh;
+  min-width: 180px;
+  min-height: 180px;
+  max-width: 260px;
+  max-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float-aura 6s infinite ease-in-out;
+}
+
+.aura-glow-pulse {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.15), rgba(0, 255, 255, 0.05) 40%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 2s, transform 2s;
+  animation: pulse-glow 4s infinite alternate ease-in-out;
+}
+
+.aura-glow-pulse.visible {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Center magical particles */
+.aura-center-wrapper::before, .aura-center-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -50px;
+  background-image: 
+    radial-gradient(2px 2px at 20% 30%, var(--power-golden) 100%, transparent),
+    radial-gradient(1.5px 1.5px at 80% 40%, var(--power-cyan) 100%, transparent),
+    radial-gradient(2px 2px at 40% 80%, var(--power-pink) 100%, transparent),
+    radial-gradient(1px 1px at 70% 90%, var(--power-golden) 100%, transparent);
+  background-size: 100% 100%;
+  opacity: 0;
+  border-radius: 50%;
+  animation: aura-sparks 8s infinite linear;
+  pointer-events: none;
+  z-index: 10;
+}
+.aura-center-wrapper::after {
+  animation: aura-sparks 12s infinite linear reverse;
+  inset: -100px;
+}
+
+.aura-glow-pulse.visible ~ .powers-center-image {
+  /* Only activate sparks when visible */
+}
+
+@keyframes aura-sparks {
+  0% { transform: rotate(0deg) scale(0.8); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: rotate(360deg) scale(1.2); opacity: 0; }
+}
+
+@keyframes float-aura {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse-glow {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 0.9; transform: scale(1.15); }
+}
+
+.powers-center-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 50px rgba(0, 255, 255, 0.1);
+}
+
+/* Orbiting Powers */
+.powers-orbit-container {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 10;
+}
+
+.power-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.power-node.emerged {
+  animation: emerge-power 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes emerge-power {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--target-x)), calc(-50% + var(--target-y))) scale(1);
+    opacity: 1;
+  }
+}
+
+.power-node.emerged:hover, .power-node.active {
+  z-index: 20;
+  /* Hover/active transform applies *after* the emerge animation finishes,
+     but since animation forwards keeps the 100% state, we need to override carefully.
+     Using a hack: just scale the internal items instead of the wrapper. */
+}
+
+.power-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(10, 10, 26, 0.8);
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  position: relative;
+}
+
+.power-node:hover .power-icon, .power-node.active .power-icon {
+  transform: scale(1.2);
+  background: rgba(20, 20, 40, 0.9);
+  box-shadow: 0 0 30px currentColor !important;
+}
+
+.power-content {
+  position: absolute;
+  width: 220px;
+  background: rgba(10, 10, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Directional positioning and transforms */
+.power-node.expand-down .power-content {
+  top: 70px;
+  transform: translateY(-10px) scale(0.95);
+}
+.power-node.expand-down:hover .power-content,
+.power-node.expand-down.active .power-content {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.power-node.expand-up .power-content {
+  bottom: 70px;
+  transform: translateY(10px) scale(0.95);
+}
+.power-node.expand-up:hover .power-content,
+.power-node.expand-up.active .power-content {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.power-node.expand-right .power-content {
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px) scale(0.95);
+}
+.power-node.expand-right:hover .power-content,
+.power-node.expand-right.active .power-content {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.power-node.expand-left .power-content {
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%) translateX(10px) scale(0.95);
+}
+.power-node.expand-left:hover .power-content,
+.power-node.expand-left.active .power-content {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.power-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 0.01em;
+}
+
+.power-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #C9D2DC;
+  margin: 0;
+}
+
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .powers-page {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  .connections-layer {
+    display: none;
+  }
+  
+  .powers-container {
+    flex-direction: column;
+    height: auto;
+    padding: 150px 0 50px 0;
+    justify-content: flex-start;
+  }
+  
+  .aura-center-wrapper {
+    margin-bottom: 40px;
+    width: 200px;
+    height: 200px;
+    animation: none; /* simpler on mobile */
+  }
+  
+  .powers-orbit-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .power-node {
+    position: relative;
+    transform: none;
+    top: auto;
+    left: auto;
+    opacity: 0;
+  }
+  
+  /* Override the emerge animation for mobile */
+  .power-node.emerged {
+    animation: emerge-mobile 0.8s ease forwards;
+    animation-delay: var(--delay);
+  }
+  
+  @keyframes emerge-mobile {
+    0% { transform: translateY(-30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  .power-node:hover .power-icon, .power-node.active .power-icon {
+    transform: scale(1.1);
+  }
+  
+  .power-node .power-content,
+  .power-node.expand-up .power-content,
+  .power-node.expand-down .power-content,
+  .power-node.expand-left .power-content,
+  .power-node.expand-right .power-content {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    opacity: 1;
+    transform: none !important;
+    margin-top: 15px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    pointer-events: auto;
+    width: 90%;
+    max-width: 350px;
+  }
+}
