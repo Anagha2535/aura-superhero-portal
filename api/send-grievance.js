@@ -25,8 +25,8 @@ export default async function handler(req, res) {
     }
 
     const resend = new Resend(resendApiKey);
-    const date = new Date().toLocaleDateString();
-    const time = new Date().toLocaleTimeString();
+    const date = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' });
+    const time = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata' });
 
     const htmlContent = `
       <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); color: #333;">
